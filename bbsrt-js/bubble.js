@@ -1,5 +1,7 @@
 const multiplier = 10;
 const quantity = parseInt(process.argv[2]);
+const timesToRepeat = 5;
+const executionTimes = [];
 
 const bubbleSort = array => {
   let flag = false;
@@ -19,6 +21,8 @@ const bubbleSort = array => {
   }
 }
 
+const meanCalc = array => array.reduce((partialSum, element) => partialSum + element, 0) / array.length;
+
 const generateRandomNumbers = (quantity, multiplier) => {
   const unitaryArray = Array(quantity).fill(1);
   return unitaryArray.map(element => element * Math.random() * multiplier);
@@ -26,10 +30,18 @@ const generateRandomNumbers = (quantity, multiplier) => {
 
 // main
 
-randomNumbersArray = generateRandomNumbers(quantity, multiplier);
+for (let i = 0; i < timesToRepeat; i++) {
+  randomNumbersArray = generateRandomNumbers(quantity, multiplier);
 
-const start = performance.now();
-bubbleSort(randomNumbersArray);
-const end = performance.now();
-console.log(`Tempo de execução: ${((end - start) / 1000).toFixed(3)} s`);
+  const start = performance.now();
+  bubbleSort(randomNumbersArray);
+  const end = performance.now();
+
+  executionTimes.push(end - start);
+}
+
+const mean = meanCalc(executionTimes);
+
+console.log(`Tempo de execução médio: ${((mean) / 1000).toFixed(3)} s`);
+
  
