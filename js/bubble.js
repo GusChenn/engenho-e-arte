@@ -24,8 +24,7 @@ const bubbleSort = array => {
 const meanCalc = array => array.reduce((partialSum, element) => partialSum + element, 0) / array.length;
 
 const generateRandomNumbers = (quantity, multiplier) => {
-  const unitaryArray = Array(quantity).fill(1);
-  return unitaryArray.map(element => element * Math.random() * multiplier);
+  return Array(quantity).fill(Math.random() * multiplier);
 };
 
 // main
